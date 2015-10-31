@@ -1,5 +1,7 @@
 child_b.example.com.	10	SOA	ns.child_b.example.com. foo. 10 10 30 90 60
 child_b.example.com.    10	NS	ns.child_b.example.com.
 
+child_b.example.com.	IN	CDS	1134 8 2 66d56a6750095047b5d91d0996cb85c79f327fe2ed99806124ddf9133073c50e
+
 ns.child_b.example.com.		10	AAAA	::1
 www.child_b.example.com.	10	AAAA	::1
