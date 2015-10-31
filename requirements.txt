@@ -1,0 +1,1 @@
+-e git+git@github.com:fcelda/dnspython.git@python3#egg=dnspython3

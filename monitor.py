@@ -35,20 +35,10 @@ class CDSFetch:
     def __init__(self, resolver):
         self._resolver = resolver
 
-    def _cds_to_ds(self, rr):
-        assert(rr.rdtype == 59)
-        text = rr.to_text()
-        return dns.rdata.from_text(dns.rdataclass.IN, dns.rdatatype.DS, text)
-
-    def _get_cds(self, zone):
-        rrs = self._resolver.query(zone, "TYPE59")
-        return [self._cds_to_ds(rr).to_text() for rr in rrs]
-
     def get_cds(self, zone):
         try:
-            return self._get_cds(zone)
-        except dns.resolver.NoAnswer:
-            return []
+            rrs = self._resolver.query(zone, "CDS", raise_on_no_answer=False).rrset
+            return [rr.to_text() for rr in rrs] if rrs else []
         except dns.resolver.NoNameservers:
             return []
 
