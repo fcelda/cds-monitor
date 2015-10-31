@@ -1,0 +1,5 @@
+child_b.example.com.	10	SOA	ns.child_b.example.com. foo. 10 10 30 90 60
+child_b.example.com.    10	NS	ns.child_b.example.com.
+
+ns.child_b.example.com.		10	AAAA	::1
+www.child_b.example.com.	10	AAAA	::1

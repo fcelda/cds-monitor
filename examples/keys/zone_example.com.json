@@ -1,0 +1,13 @@
+{
+  "policy": null,
+  "keys": [
+    {
+      "id": "c0ab12d886b5cf95495725a62aa536fdda96f6fd",
+      "keytag": 32972,
+      "algorithm": 13,
+      "public_key": "i3PsHYnyrLjcWkEygC8FYIOdIVlghg1UpNZXjhYK8KtEjBjvd2eQhviLAIeLdpV95u7+mCM9mLPH9W8cl8wlsg==",
+      "ksk": false,
+      "created": "2015-10-31T04:18:32+0000"
+    }
+  ]
+}

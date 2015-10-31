@@ -1,0 +1,27 @@
+;; Zone dump (Knot DNS 2.1.0-dev)
+example.com.        	10	SOA	ns.example.com. root. 5 10 30 2419200 60
+example.com.        	10	NS	ns.example.com.
+example.com.        	10	DNSKEY	256 3 13 i3PsHYnyrLjcWkEygC8FYIOdIVlghg1UpNZXjhYK8KtEjBjvd2eQhviLAIeLdpV95u7+mCM9mLPH9W8cl8wlsg==
+child_a.example.com.	10	NS	ns.child_a.example.com.example.com.
+ns.child_a.example.com.	10	AAAA	::1
+child_b.example.com.	10	NS	ns.child_b.example.com.example.com.
+child_b.example.com.	3600	DS	1134 8 2 66D56A6750095047B5D91D0996CB85C79F327FE2ED99806124DDF9133073C50E
+ns.child_b.example.com.	10	AAAA	::1
+ns.example.com.     	10	AAAA	::1
+;; DNSSEC signatures
+example.com.        	10	RRSIG	NS 13 2 10 20151130041937 20151031041937 32972 example.com. /7IgE7Dp42LhmeLNSxZyGKgSHuIGqHjxQGYSameIIjs391b/BafBOUz0vSGI7h9DzvS0o8Y2K4JlaYo0jyefng==
+example.com.        	10	RRSIG	SOA 13 2 10 20151130042541 20151031042541 32972 example.com. JbZJy0F3y/0WsmfMmvU8Us6YYygoyRzznaO7hO539csvlh8/IzdrfO1SgtyFfN5LIG7kWCne8FMrBnPT+N89kw==
+example.com.        	60	RRSIG	NSEC 13 2 60 20151130041937 20151031041937 32972 example.com. QTYvKW6YVFN8IOJakPH7ZL1+aHKoP9RJQuQqABrOcvhSN36U7akGtRmwSfzYOtIV33KYrLc+//eLeP/0ub2+RQ==
+example.com.        	10	RRSIG	DNSKEY 13 2 10 20151130041937 20151031041937 32972 example.com. VCAM2G62LLqdA+h/4BLf6qnUuhZ5fCzMq6/bt+NA4FUYOEOu76VyrG5PDxXJb+VNhDTCkP74fDnEHxXvVdbLZw==
+child_a.example.com.	60	RRSIG	NSEC 13 3 60 20151130041937 20151031041937 32972 example.com. BOGdXZLQt3ZslGmkT3tfcS03w0g7K95Q1po0w9e8XoAAHkTrh9ibA9Va/qa0F++HWv4NQJEO8NDaI0wUn/d/8Q==
+child_b.example.com.	3600	RRSIG	DS 13 3 3600 20151130042541 20151031042541 32972 example.com. kpFDYm3tru+Q4AYHzyRKFyLQhq54iVIEMk0RIWVdq/AIG2WJ9QtQPSLzxof7N1NXxQ3ZCs0G/tVtmybAzdkDuw==
+child_b.example.com.	60	RRSIG	NSEC 13 3 60 20151130042541 20151031042541 32972 example.com. wxsaWm8Gl7kbA7iNwztwpu8MNUnelCmcisxYLGYKg5P6+5c0eD0VaizRReotqi/VDxf09f7AdovZDaG6TvvQrg==
+ns.example.com.     	10	RRSIG	AAAA 13 3 10 20151130041937 20151031041937 32972 example.com. VHccVzBBWJiikfBg4wxhdJsS/740dr6Aim9SR9ZG1n65Xtg5w/hgbkRFyOBbpeHvV/MDBoLAQ5PrLfES3N/0hQ==
+ns.example.com.     	60	RRSIG	NSEC 13 3 60 20151130041937 20151031041937 32972 example.com. 43Qwip5B8Smo13DAGu5jFOlSIGMJse2cFfS8aY7ETw6EosIdCtlfUUYmtkqyQjMbpW3JC5YbPeZ5KWX0L8u3Og==
+;; DNSSEC NSEC chain
+example.com.        	60	NSEC	child_a.example.com. NS SOA RRSIG NSEC DNSKEY
+child_a.example.com.	60	NSEC	child_b.example.com. NS RRSIG NSEC
+child_b.example.com.	60	NSEC	ns.example.com. NS DS RRSIG NSEC
+ns.example.com.     	60	NSEC	example.com. AAAA RRSIG NSEC
+;; Written 22 records
+;; Time 2015-10-31 05:25:41 CET
