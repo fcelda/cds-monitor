@@ -1,4 +1,4 @@
-# CDS/CDNSKEY monitoring prototype
+# CDS/CDNSKEY Monitoring Prototype
 
 This is a prototype application created during IETF 94 Hackathon in Yokohama.
 
