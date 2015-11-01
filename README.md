@@ -47,6 +47,10 @@ in the main script.
 - Jan Včelák
 - Shumon Huque
 
+## License
+
+GNU General Public License version 3 or (at your option) any later versions.
+
 ## TODO
 
 - Configuration file support.
