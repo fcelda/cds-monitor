@@ -33,7 +33,7 @@ class Monitor:
                 logging.info("%s, is up-to-date" % zone)
             else:
                 logging.info("%s, sending update" % zone)
-                self._update(zone, cds_list)
+                self._update.update_ds(zone, cds_list)
 
         self._next = time_start + self._source.refresh_seconds()
 
