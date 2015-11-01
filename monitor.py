@@ -1,35 +1,10 @@
 #!/usr/bin/env python3
 
+import cdsmon.source
+
 import dns.query
 import dns.resolver
 import dns.zone
-
-class Source:
-    def get_delegations(self):
-        raise NotImplementedError()
-
-class AXFRSource(Source):
-    def __init__(self, server, zone):
-        self._server = server
-        self._zone = zone
-
-    def _is_delegation(self, node):
-        return node.get_rdataset(dns.rdataclass.IN, dns.rdatatype.NS) is not None
-
-    def _get_ds(self, node):
-        rrs = node.get_rdataset(dns.rdataclass.IN, dns.rdatatype.DS)
-        return [rr.to_text() for rr in rrs] if rrs else []
-
-    def get_delegations(self):
-        zone = dns.zone.from_xfr(dns.query.xfr(self._server, self._zone))
-        for name in zone:
-            fqdn = name.concatenate(zone.origin)
-            if fqdn == zone.origin:
-                continue
-            node = zone[name]
-            if self._is_delegation(node):
-                ds = self._get_ds(node)
-                yield (fqdn, ds)
 
 class CDSFetch:
     def __init__(self, resolver):
@@ -75,7 +50,8 @@ class DDNSUpdate(DSUpdate):
         response = dns.query.tcp(update, self._server, port=self._port)
         return response.rcode() == 0
 
-source = AXFRSource("::2", "example.com")
+#source = cdsmon.source.ZonefileSource("example.com", "examples/zones/example.com.zone")
+source = cdsmon.source.AXFRSource("example.com", "::2")
 
 resolver = dns.resolver.Resolver(configure=False)
 resolver.nameservers = [ "::1" ]
