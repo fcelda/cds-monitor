@@ -42,6 +42,22 @@ class CDSFetch:
         except dns.resolver.NoNameservers:
             return []
 
+class DSUpdate:
+    pass
+
+class DDNSUpdate(DSUpdate):
+    def __init__(self, server, port, origin, ttl):
+        self._server = server
+        self._port = port
+        self._origin = origin
+        self._ttl = ttl
+
+    def update_ds(self, zone, ds_set):
+        print(">>> server %s %d" % (self._server, self._port))
+        print(">>> origin %s" % self._origin)
+        print(">>> update delete %s DS" % zone)
+        print(">>> update add %s DS %s" % (zone, ds_set))
+
 source = AXFRSource("::2", "example.com")
 
 resolver = dns.resolver.Resolver(configure=False)
@@ -49,6 +65,8 @@ resolver.nameservers = [ "::1" ]
 resolver.port = 53000
 
 cdsfetch = CDSFetch(resolver)
+
+dsupdate = DDNSUpdate("::2", 53, "example.com", 10)
 
 for (zone, ds_list) in source.get_delegations():
     print("# %s" % zone)
@@ -58,3 +76,10 @@ for (zone, ds_list) in source.get_delegations():
     cds_list = cdsfetch.get_cds(zone)
     for cds in cds_list:
         print("- client %s" % cds)
+
+    if len(cds_list) == 0:
+        continue
+
+    if not sorted(ds_list) == sorted(cds_list):
+        print("- need update")
+        dsupdate.update_ds(zone, cds_list)
