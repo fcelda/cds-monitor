@@ -22,7 +22,8 @@ class DDNSUpdate(Update):
         self._ttl = ttl
         self._tsig = tsig
 
-    def _init_update(self, zone):
+    def _init_update(self):
+        origin = dns.name.from_text(self._origin)
         if self._tsig is not None:
             name, algorithm_name, key = self._tsig
             keyring = dns.tsigkeyring.from_text({name: key})
@@ -31,13 +32,13 @@ class DDNSUpdate(Update):
             keyring = None
             keyalgorithm = None
 
-        return dns.update.Update(zone, keyring=keyring, keyalgorithm=keyalgorithm)
+        return dns.update.Update(origin, keyring=keyring, keyalgorithm=keyalgorithm)
 
-    def update_ds(self, zone, ds_set):
-        update = self._init_update(self._origin)
-        update.delete(zone, dns.rdatatype.DS)
+    def update_ds(self, name, ds_set):
+        update = self._init_update()
+        name = dns.name.from_text(name)
+        update.delete(name, dns.rdatatype.DS)
         for ds in ds_set:
-            update.add(zone, self._ttl, dns.rdatatype.DS, ds)
-        print(update)
+            update.add(name, self._ttl, dns.rdatatype.DS, ds)
         response = dns.query.tcp(update, self._server, port=self._port)
         return response.rcode() == 0
