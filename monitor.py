@@ -6,7 +6,7 @@ import dns.zone
 
 class Source:
     def get_delegations(self):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 class AXFRSource(Source):
     def __init__(self, server, zone):
